@@ -6,14 +6,14 @@ import java.util.List;
 public class BookItem extends book {
 
     String barCode;
+    Rack rack;
 
-    List<BookItem> bookItems;
 
-    public BookItem(String barCode, String title, int uuid){
+    public BookItem(String barCode, String title, int uuid, Rack rack){
         this.barCode=barCode;
         this.setTitle(title);
         this.setUuid(uuid);
-        this.bookItems = new ArrayList<>();
+        this.rack = rack;
     }
 
     public String getBarCode() {
@@ -24,8 +24,12 @@ public class BookItem extends book {
         this.barCode = barCode;
     }
 
-    public void addCopy(BookItem bookItem){
-        this.bookItems.add(bookItem);
+    public Rack getRack() {
+        return rack;
+    }
+
+    public void setRack(Rack rack) {
+        this.rack = rack;
     }
 
     @Override

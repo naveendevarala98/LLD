@@ -8,26 +8,18 @@ import java.util.Map;
 import java.util.TreeSet;
 
 public class LibraryService {
-    int rackSize;
-    TreeSet<Integer> ts;
-    public LibraryService(int rackSize){
-        this.rackSize=rackSize;
-        ts  = new TreeSet<>();
-        for (int i=1;i<=rackSize;i++){
-            ts.add(i);
-        }
-    }
+
     public void addBookItem(BookItem bookItem){
-        int rack = ts.pollFirst();
         if(bookItem != null){
-            LibraryRepository.addBook(bookItem, rack);
+            LibraryRepository.addBook(bookItem);
         }
-
-        System.out.println(ts.size());
     }
 
+    public List<BookItem> fetchBooks(String rackLoaction){
+        return LibraryRepository.fetchBookMap(rackLoaction);
+    }
 
-    public List<BookItem> fetchBooks(int rackNo){
-        return LibraryRepository.fetchBookMap(rackNo);
+    public void removeCopyBooks(BookItem bookItem){
+         LibraryRepository.removeBook(bookItem);
     }
 }
