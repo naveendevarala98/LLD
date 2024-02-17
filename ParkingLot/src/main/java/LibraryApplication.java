@@ -1,8 +1,14 @@
 import Book.BookItem;
 import Book.Rack;
+import Repository.BookIssueRepository;
+import Repository.UserRespository;
+import model.Member;
+import service.BookIssueService;
 import service.LibraryService;
+import service.UserService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class LibraryApplication {
@@ -10,6 +16,10 @@ public class LibraryApplication {
     public static void main(String[] args) {
 
         LibraryService libraryService = new LibraryService();
+        BookIssueService bookIssueService = new BookIssueService();
+        UserService userService = new UserService();
+
+
         Rack rack = new Rack();
         rack.setNumber(1);
         rack.setLocation("A");
@@ -34,12 +44,30 @@ public class LibraryApplication {
         libraryService.addBookItem(bookItem2);
         libraryService.addBookItem(bookItemCopy);
 
-            System.out.println(libraryService.fetchBooks("A"));
+            System.out.println("Books in rack A "+libraryService.fetchBooks("A"));
 
 
             libraryService.removeCopyBooks(bookItemCopy);
 
-        System.out.println(libraryService.fetchBooks("A"));
+        System.out.println("Fetch all books before assign "+libraryService.fetchBooks(""));
+
+
+        Member m1 = new Member("user1","pwd1");
+        userService.adduser(m1);
+
+        System.out.println(UserRespository.fetchUser());
+
+        bookItem.setIssueDate(new Date());
+        bookIssueService.issueBook(m1.getUserId(),bookItem);
+
+        System.out.println(BookIssueRepository.getBookAssociatedWithUser(m1.getUserId()));
+
+        System.out.println("Fetch all books after assign "+libraryService.fetchBooks(""));
+
+
+
+
+
 
 
 

@@ -29,7 +29,10 @@ public class LibraryRepository {
     }
 
     public  static List<BookItem> fetchBookMap(String rackLocation){
+        if(!rackLocation.isEmpty())
       return rackBookMap.stream().filter(r->r.getRack().getLocation().equals(rackLocation)).collect(Collectors.toList());
+        else
+            return rackBookMap;
     }
 
 
